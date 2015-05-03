@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+﻿using System;
 using UnityEngine;
 
 namespace Assets.Resources.Code.Camera
@@ -18,12 +18,24 @@ namespace Assets.Resources.Code.Camera
             get;
         }
 
-        string DeviceName { get; set; }
+        Texture2D SnapShot { get; }
 
-        void TakePicture();
+        Renderer RendererMaterial { get; }
+
+        string FrontFacingDeviceName { get; set; }
+
+
 
         void SavePicture();
-        
+
+        void SavePicture(string path);
+
+        void LoadPicture(string path,Action<bool> callbackAction);
+
+        void DisplayCameraStream();
+
+        void HideCameraStream();
+
 
     }
 }
