@@ -10,7 +10,7 @@ namespace Assets.Resources.Code.Players
         private bool _hasPicture = false;
         private AndroidCameraController _cameraController;
         private string _snapShotPath;
-
+        private string _playerName;
 
         public AndroidCameraController CameraController
         {
@@ -57,7 +57,7 @@ namespace Assets.Resources.Code.Players
             {
                 if (_snapShotPath == null)
                 {
-                    _snapShotPath = Application.persistentDataPath + "/" + name + ".png";
+                    _snapShotPath = Application.persistentDataPath + "/" + PlayerName + ".png";
                 }
                 return _snapShotPath;
             }
@@ -77,6 +77,12 @@ namespace Assets.Resources.Code.Players
                 return _view;
             }
           
+        }
+
+        public string PlayerName
+        {
+            get { return _playerName; }
+            set { _playerName = value; }
         }
 
         public void PictureFound(bool isSuccessfull)

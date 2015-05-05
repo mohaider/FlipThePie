@@ -1,0 +1,107 @@
+fileFormatVersion: 2
+guid: 1936ab2a176a843499a8f99f81182860
+timeCreated: 1430855472
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: TextBox_0
+    21300002: TextBox_1
+    21300004: TextBox_2
+    21300006: TextBox_3
+    21300008: TextBox_4
+    21300010: TextBox_5
+    21300012: TextBox_6
+    21300014: TextBox_7
+    21300016: TextBox_8
+    21300018: TextBox_9
+    21300020: TextBox_10
+    21300022: TextBox_11
+    21300024: TextBox_12
+    21300026: TextBox_13
+    21300028: TextBox_14
+    21300030: TextBox_15
+    21300032: TextBox_16
+    21300034: TextBox_17
+    21300036: TextBox_18
+    21300038: TextBox_19
+    21300040: TextBox_20
+    21300042: TextBox_21
+    21300044: TextBox_22
+    21300046: TextBox_23
+    21300048: TextBox_24
+    21300050: TextBox_25
+    21300052: TextBox_26
+    21300054: TextBox_27
+    21300056: TextBox_28
+    21300058: TextBox_29
+    21300060: TextBox_30
+    21300062: TextBox_31
+    21300064: TextBox_32
+    21300066: TextBox_33
+    21300068: TextBox_34
+    21300070: TextBox_35
+    21300072: TextBox_36
+    21300074: TextBox_37
+    21300076: TextBox_38
+    21300078: TextBox_39
+    21300080: TextBox_40
+    21300082: TextBox_41
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: TextBox_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 471
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,6 +9,7 @@ TagManager:
   - CameraButton
   - RetakePhotoOption
   - FlipCamera
+  - PlayerHeadMover
   layers:
   - Default
   - TransparentFX
