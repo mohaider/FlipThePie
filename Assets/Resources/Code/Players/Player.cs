@@ -7,7 +7,8 @@ namespace Assets.Resources.Code.Players
 {
     public class Player : MonoBehaviour
     {
-        private const string Prependpath = "Assets/Resources/SaveData/SnapShots/";
+       // private const string Prependpath = "Assets/Resources/SaveData/SnapShots/";
+       
         private string _snapShotPath;
         private GameObject _cameraButtonGO;
         private bool _hasPicture = false;
@@ -35,7 +36,8 @@ namespace Assets.Resources.Code.Players
             {
                 if (_snapShotPath == null)
                 {
-                    _snapShotPath = Prependpath + name + ".png";
+                    _snapShotPath = Application.persistentDataPath + "/"+ name + ".png";
+                   
                 }
 
                 return _snapShotPath;
@@ -109,7 +111,7 @@ namespace Assets.Resources.Code.Players
 
         private void Start()
         {
-            TryToLoadPlayerPicture();
+          //  TryToLoadPlayerPicture();
         }
 }
 }

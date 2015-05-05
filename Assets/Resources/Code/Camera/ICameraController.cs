@@ -22,7 +22,7 @@ namespace Assets.Resources.Code.Camera
 
         Renderer RendererMaterial { get; }
 
-        string FrontFacingDeviceName { get; set; }
+        string DeviceName { get; set; }
 
 
 

@@ -11,24 +11,26 @@ namespace Assets.Resources.Code.Camera
     {
         private WebCamTexture _cameraTexture;
         private WebCamDevice[] _devices;
-        private string _deviceName;
+        
+        private string _currentDeviceName;
+        private int _currentDeviceIndex=0;
         private Renderer _renderer;
+        private GUITexture _guiTexture;
         private Texture2D _snapShot;
         public WebCamTexture CameraTexture
         {
             get
             {
                 if (_cameraTexture == null)
-                {
-                    _cameraTexture = new WebCamTexture(FrontFacingDeviceName,400,400,15);
-                    RendererMaterial.material.mainTexture = _cameraTexture;
-                }
+                {  
+              
+                    _cameraTexture = new WebCamTexture(DeviceName);
+                   
+                 
+               }
                 return _cameraTexture;
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set { _cameraTexture = value; }
         }
 
         public WebCamDevice[] Devices
@@ -37,6 +39,11 @@ namespace Assets.Resources.Code.Camera
             {
                 if (_devices == null)
                 {
+                    if (WebCamTexture.devices.Length == 0)
+                    {
+                        throw new NoCameraFoundException();
+                    }
+                    
                     _devices = WebCamTexture.devices;
                 }
                 return _devices;
@@ -54,31 +61,20 @@ namespace Assets.Resources.Code.Camera
                 return _renderer;
             }
         }
-        /// <summary>
-        /// we'll only grab the front facing device's name
-        /// </summary>
-        public string FrontFacingDeviceName
+
+        public string DeviceName
         {
             get
             {
-                if (_deviceName == null)
+                if (_currentDeviceName == null)
                 {
-                    for (int i = 0; i < Devices.Length; i++)
-                    {
-                        if (Devices[i].isFrontFacing)
-                        {
-                            _deviceName = Devices[i].name;
-                            break;
-                        }
-                    }
-                    
+                    _currentDeviceName = Devices[_currentDeviceIndex].name;  
+
                 }
-                return _deviceName;
+                _currentDeviceName = Devices[_currentDeviceIndex].name;
+                return _currentDeviceName;
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set { _currentDeviceName = value; }
         }
         public Texture2D SnapShot
         {
@@ -90,12 +86,39 @@ namespace Assets.Resources.Code.Camera
                 }
                 return _snapShot;
             }
+            set { _snapShot = value; }
         }
-   
+
+        public GUITexture GuiTexture
+        {
+            get
+            {
+                if (_guiTexture == null)
+                {
+                    _guiTexture = GetComponent<GUITexture>();
+                }
+                return _guiTexture;
+            }
+            set { _guiTexture = value; }
+        }
+
+        private void SetUpGUITexture()
+        {
+            float w = Screen.width;
+            float h = Screen.height;
+            float insetX = -(w/2);
+           // float insetX =0;
+//            float insetY = h;
+            float insetY = -(h/2);
+     //       GuiTexture.transform.localScale = new Vector3(-1,-1,1);
+            GuiTexture.pixelInset = new Rect(insetX,insetY ,w,h);
+            SetRendererTexture();
+
+        }
 
         public void SavePicture()
         {
-            
+            SnapShot = new Texture2D(CameraTexture.width, CameraTexture.height);
             SnapShot.SetPixels(CameraTexture.GetPixels());
             SnapShot.Apply();
             System.IO.File.WriteAllBytes("Assets/Resources/SaveData/Snapshots/test1.png", SnapShot.EncodeToPNG());
@@ -103,16 +126,12 @@ namespace Assets.Resources.Code.Camera
 
         public void SavePicture(string path)
         {
+            SnapShot = new Texture2D(CameraTexture.width, CameraTexture.height);
             SnapShot.SetPixels(CameraTexture.GetPixels());
             SnapShot.Apply();
             System.IO.File.WriteAllBytes(path, SnapShot.EncodeToPNG());
         }
    
-
-    
-
-
-
 
         /// <summary>
         /// try to load the image into the gameobjects renderer. if it fails, then assign the delegated action bool to false
@@ -138,6 +157,27 @@ namespace Assets.Resources.Code.Camera
           
          
         }
+        /// <summary>
+        /// switches between different cameras
+        /// </summary>
+        public void SwitchCamera()
+        {
+            CameraTexture.Stop();
+            if (Devices.Length > 0)
+            {
+                _currentDeviceIndex++;
+                if (_currentDeviceIndex >= Devices.Length)
+                {
+                    _currentDeviceIndex = 0;
+                }
+                CameraTexture.deviceName = DeviceName;
+                //SetGUITexture();
+                SetRendererTexture();
+                DisplayCameraStream();
+            }
+            //DeviceName = Devices[_currentDeviceIndex].name;
+          
+        }
 
 
 
@@ -145,12 +185,42 @@ namespace Assets.Resources.Code.Camera
 
         public void DisplayCameraStream()
         {
+          
+            
             CameraTexture.Play();
+         
         }
 
+        private void SetRendererTexture()
+        {
+            RendererMaterial.material.mainTexture = CameraTexture;
+        }
+
+        private void SetGUITexture()
+        {
+            GuiTexture.texture = CameraTexture;
+        }
         public void HideCameraStream()
         {
             CameraTexture.Stop();
+        }
+
+       
+
+        private void Start()
+        {
+            //SetUpGUITexture();
+            //SetGUITexture();
+            UnityEngine.Camera cam = UnityEngine.Camera.main;
+          //  transform.localScale = new Vector3(cam.orthographicSize / 2 * ((float)Screen.width / (float)Screen.height),  1f,cam.orthographicSize / 2);
+            SetRendererTexture();
+            DisplayCameraStream();
+            baseRotation = transform.rotation;
+        }
+        private Quaternion baseRotation;
+        void Update()
+        {
+            transform.rotation = baseRotation * Quaternion.AngleAxis(CameraTexture.videoRotationAngle, Vector3.up);
         }
     }
 }

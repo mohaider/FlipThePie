@@ -10,7 +10,7 @@ namespace Assets.Resources.Code.Camera
     {
         private AndroidCameraController _androidCameraController;
         public bool DebugMode;
-
+        public UnityEngine.UI.Text Texter; 
         public AndroidCameraController CameraController
         {
             get
@@ -36,7 +36,16 @@ namespace Assets.Resources.Code.Camera
             if (DebugMode)
             {
                 CheckInputs();
+                UpdateDebuggerText();
             }
+          
+        }
+
+        void UpdateDebuggerText()
+        {
+            string s = "current device: " + CameraController.DeviceName;
+            s += "\n current device count = "+ CameraController.Devices.Length;
+            Texter.text = s;
         }
 
         private void CheckInputs()
@@ -45,11 +54,17 @@ namespace Assets.Resources.Code.Camera
             {
                 CameraController.SavePicture();
             }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                CameraController.DisplayCameraStream();
+            }
+
         }
 
         public void DoStuff()
         {
             print("button pressed");
+
         }
         
     }
