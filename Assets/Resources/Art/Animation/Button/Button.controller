@@ -87,7 +87,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Button_Move_In
-  m_Speed: -1
+  m_Speed: -1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110179666}
@@ -105,7 +105,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Button_Move_Out
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110137134}

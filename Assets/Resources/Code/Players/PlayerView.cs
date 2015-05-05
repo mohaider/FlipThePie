@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 namespace Assets.Resources.Code.Players
@@ -11,7 +12,8 @@ namespace Assets.Resources.Code.Players
         private Animator _yesNoRetakePhotoAnimator;
         private GameObject _flipCamButtonGameObject;
         private Animator _flipCamAnimator;
-
+        private GameObject _playerHeadMoverGameObject;
+        private Animator _playerHeadMoverAnimator;
 
         public GameObject CameraButtonGameObj
         {
@@ -86,24 +88,76 @@ namespace Assets.Resources.Code.Players
             }
         }
 
+        public GameObject PlayerHeadMoverGameObject
+        {
+            get
+            {
+                if (_playerHeadMoverGameObject == null)
+                {
+                    _playerHeadMoverGameObject = GameObject.FindGameObjectWithTag("PlayerHeadMover");
+                }
+                return _playerHeadMoverGameObject;
+            }
+        }
+
+        public Animator PlayerHeadMoverAnimator
+        {
+            get
+            {
+                if (_playerHeadMoverAnimator == null)
+                {
+                    _playerHeadMoverAnimator = PlayerHeadMoverGameObject.GetComponent<Animator>();
+                }
+                return _playerHeadMoverAnimator;
+            }
+        }
+
         internal void ShowCameraButton(bool status)
         {
-            CameraButtonAnimator.enabled = true;
-            CameraButtonAnimator.SetBool("isHidden", status); 
+            if (status)
+            {
+                CameraButtonAnimator.enabled = status;
+            }
+            CameraButtonAnimator.SetBool("isHidden", !status); 
         }
 
 
         internal void ShowRetakePhotoOptions(bool status)
         {
-            YesNoRetakePhotoAnimator.enabled = true;
-            YesNoRetakePhotoAnimator.SetBool("isHidden", status);
+            if (status)
+            {
+                YesNoRetakePhotoAnimator.enabled = status;
+            }
+            YesNoRetakePhotoAnimator.SetBool("isHidden", !status);
         }
 
         internal void ShowFlipCamButton(bool status)
         {
-            FlipCamAnimator.enabled = true;
-            FlipCamAnimator.SetBool("isHidden",status);
+            if (status)
+            {
+                FlipCamAnimator.enabled = status;
+            }
+            FlipCamAnimator.SetBool("isHidden",!status);
         }
+
+        internal void ShowSettingsButton(bool status)
+        {
+           Debug.Log("Fill up this code");
+        }
+
+        internal void ShowPlayerHead(bool status)
+        {
+            if (status)
+            {
+                EnableAnimator(PlayerHeadMoverAnimator,status);
+            }
+            PlayerHeadMoverAnimator.SetBool("isHidden",!status);
+        }
+        internal void EnableAnimator(Animator anim, bool status)
+        {
+            anim.enabled = status;
+        }
+        
         
         private void Awake()
         {

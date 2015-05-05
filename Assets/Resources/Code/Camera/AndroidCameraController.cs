@@ -185,8 +185,8 @@ namespace Assets.Resources.Code.Camera
 
         public void DisplayCameraStream()
         {
-          
-            
+
+            SetRendererTexture();
             CameraTexture.Play();
          
         }
