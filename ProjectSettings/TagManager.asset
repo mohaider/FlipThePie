@@ -10,6 +10,8 @@ TagManager:
   - RetakePhotoOption
   - FlipCamera
   - PlayerHeadMover
+  - MessageWindowText
+  - MessageWindow
   layers:
   - Default
   - TransparentFX
