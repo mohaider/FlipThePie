@@ -1,130 +1,197 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
+using Assets.Resources.Code.GameLogic.Level;
+using Assets.Resources.Code.GameLogic.Messaging;
 using Assets.Resources.Code.Players;
-using Assets.Resources.Code.UIElements.Messages;
+
 using UnityEngine;
-using UnityEngine.UI;
+
 
 namespace Assets.Resources.Code.GameLogic
 {
-    public class GameDirector: MonoBehaviour
+    public class GameDirector : MonoBehaviour
     {
-        private List<PlayerModel> _playersList;
-        private MessageWindowDelegate _msgWindowDelegate;
-        private GameObject _messageWindowGameObject;
-        private Text _messageWindowText;
-        private Animator _messageWindowAnimator;
+        private static GameDirector _instance;
+        private PlayerSettingsCreationManager _playerSettings;
+        private Player _currentPlayer;
+        private List<Player> _playerList; 
+        private Queue<Player> _playerQueue;
+        private List<BaseLevelController> _levelsList;
+        private BaseLevelController _currentLevel;
+        public bool SkipTutorial = true;
+        private bool _singlePlayerMode;
 
-        public MessageWindowDelegate MsgWindowDelegate
+
+
+        public Queue<Player> PlayerQueue
         {
             get
             {
-                if (_msgWindowDelegate == null)
+                if (_playerQueue == null)
                 {
-                    _msgWindowDelegate = new MessageWindowDelegate();
+                    _playerQueue = new Queue<Player>();
                 }
-                return _msgWindowDelegate;
+                return _playerQueue;
             }
-            set { _msgWindowDelegate = value; }
+            set { _playerQueue = value; }
         }
 
-        public GameObject MessageWindowGameObject
+        public static GameDirector Instance
         {
             get
             {
-                if (_messageWindowGameObject == null)
+                if (_instance == null)
                 {
-                    _messageWindowGameObject = GameObject.FindGameObjectWithTag("MessageWindow");
+                    GameObject dir = GameObject.FindGameObjectWithTag("Director");
+                    _instance = dir.GetComponent<GameDirector>();
                 }
-                return _messageWindowGameObject;
+                return _instance;
             }
+            set { _instance = value; }
         }
 
-        public Text MessageWindowText
+        public PlayerSettingsCreationManager PlayerSettings
+        {
+            get { return PlayerSettingsCreationManager.Instance; }
+
+        }
+
+        public List<BaseLevelController> LevelsList
         {
             get
             {
-                if (_messageWindowText == null)
+                if (_levelsList == null)
                 {
-                    GameObject obj = GameObject.FindGameObjectWithTag("MessageWindowText");
-                    _messageWindowText = obj.GetComponent<Text>();
+                    _levelsList = new List<BaseLevelController>();
                 }
-                return _messageWindowText;
+                return _levelsList;
             }
-           
+            set { _levelsList = value; }
         }
 
-        public Animator MessageWindowAnimator
+        public Player CurrentPlayer
+        {
+            get { return _currentPlayer; }
+            set { _currentPlayer = value; }
+        }
+
+        public List<Player> PlayerList
         {
             get
             {
-                if (_messageWindowAnimator == null)
+                if (_playerList == null)
+
                 {
-                    _messageWindowAnimator = MessageWindowGameObject.GetComponent<Animator>();
+                    _playerList = new List<Player>();
                 }
-                return _messageWindowAnimator;
+                return _playerList;
             }
+            set { _playerList = value; }
         }
 
-        public List<PlayerModel> PlayersList
+
+        public void NotifyWindow(string msg, string originator)
         {
-            get
+
+        }
+
+
+        /// <summary>
+        /// need to know which player finished processing
+        /// if it's player 1 and we have multiple players, then we set the current player as the next player in the list
+        /// else change the state 
+        /// </summary>
+        internal void PlayerFinishedSelection()
+        {
+            if (_singlePlayerMode)
             {
-                if (_playersList == null)
-                {
-                    _playersList = new List<PlayerModel>();
-                }
-                return _playersList;
+                ChangeStateToGameMode();
             }
-            set { _playersList = value; }
+            else if (!_singlePlayerMode && PlayerQueue.Count != 0)
+            {
+                CurrentPlayer = PlayerQueue.Dequeue();
+                ChangeStateToIconSelection();
+            }
         }
 
-        private void Start()
+        private void ChangeStateToIconSelection()
         {
-            MessageWindowAnimator.enabled = false;
-
+            LevelView.Instance.SwitchToPlayerIconSelect(true);
         }
 
-        private void Awake()
+        private void ChangeStateToGameMode()
         {
-            _msgWindowDelegate = new MessageWindowDelegate();
-            MsgWindowDelegate.MessageEvent += (s, e) => ShowTextBox(e.Message);
+            LevelView.Instance.SwitchToNoRollStateView(true);
         }
 
-        private void OnEnable()
+        public void PlayerIconSelected(string icon)
         {
+            string chosenIcon = icon.ToLowerInvariant();
+            switch (chosenIcon)
+            {
+                case "monkey":
+                    CurrentPlayer.SelectedIcon = PlayerHeadType.Monkey;
+                    break;
+                case "giraffe":
+                    CurrentPlayer.SelectedIcon = PlayerHeadType.Giraffe;
+                    break;
+            }
+            CurrentPlayer.ChosenIcon = icon;
             
+            PlayerSettingsCreationManager.Instance.IconSelected();
         }
 
-        private void OnDisable()
+        public void VerifyPlayerPicture()
         {
-            
+            if (CurrentPlayer.HasPicture)
+            {
+                MessageNotificationManager.Instance.RequestMessageBox(
+                    new Message(new Sender 
+                    { Name = CurrentPlayer.PlayerName, CallbackAction = RequestToReplacePicture },
+                        "It seems like you already have a picture stored. Do you wish to take a new one instead?"));
+            }
+            else
+            {
+                MessageNotificationManager.Instance.RequestMessageBox(
+                    new Message(new Sender { Name = CurrentPlayer.PlayerName, CallbackAction = RequestToTakeNewPicture },
+                        "First we need to take a picture of you first. Make sure you line up your face for a snazzy pic!"));
+               
+            }
         }
 
-        public void NotifyWindow(string msg,string originator)
+        private void RequestToTakeNewPicture(bool obj)
         {
-            MsgWindowDelegate.SetMessage(new Message{Msg = msg,MsgOrigin = originator});
-        }
-        private void ShowTextBox(string str)
-        {
-            EnableMessageBox(true);
-            MessageWindowText.text = str;
+            ChangeLevelStateToCameraView();
         }
 
-        private void EnableMessageBox(bool status)
+        private void RequestToReplacePicture(bool status)
         {
             if (status)
             {
-                MessageWindowAnimator.enabled = status;
+                ChangeLevelStateToCameraView();
             }
-            MessageWindowAnimator.SetBool("isHidden",!status);
+            else
+            {
+                PlayerPictureSelected();
+            }
         }
 
-        public void HideMessageBox()
+        private void ChangeLevelStateToCameraView()
         {
-            EnableMessageBox(false );
+            _currentLevel.ChangeState(BaseLevelState.CameraViewState);
+        }
+
+        public void PlayerPictureSelected()
+        {
+            CurrentPlayer.HasPicture = true;
+            PlayerSettingsCreationManager.Instance.PictureSelected();
+        }
+
+
+        public void TakePlayerPicture()
+        {
+
         }
     }
 }

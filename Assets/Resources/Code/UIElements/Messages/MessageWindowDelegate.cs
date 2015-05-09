@@ -14,9 +14,9 @@ namespace Assets.Resources.Code.UIElements.Messages
            }
        }
 
-       public void SetMessage(Message message)
+       public void SetMessage(Messagerrrrr messagerrrrr)
        {
-           OnNewMessage(message.Msg,message.MsgOrigin);
+           OnNewMessage(messagerrrrr.Msg,messagerrrrr.MsgOrigin);
        }
 
  

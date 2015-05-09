@@ -1,169 +1,83 @@
 ﻿
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Resources.Code.Players
 {
+    public enum PlayerHeadType
+    {
+        Giraffe,
+        Monkey
+    }
     public class PlayerView : MonoBehaviour
     {
-        private GameObject _cameraButtonGameObj;
-        private Animator _cameraButtonAnimator;
-        private GameObject _yesNoRetakePhotoBGameObject;
-        private Animator _yesNoRetakePhotoAnimator;
-        private GameObject _flipCamButtonGameObject;
-        private Animator _flipCamAnimator;
-        private GameObject _playerHeadMoverGameObject;
-        private Animator _playerHeadMoverAnimator;
 
-        public GameObject CameraButtonGameObj
+        public Sprite MonkeySprite;
+        public Sprite GiraffeSprite;
+        private UnityEngine.UI.Image _playerImage;
+        private static PlayerView _instance;
+
+
+
+        internal void ChangeIcon(PlayerHeadType value)
+        {
+            switch (value)
+            {
+                case PlayerHeadType.Giraffe:
+                    PlayerImage.sprite = GiraffeSprite;
+                    break;
+
+                    case PlayerHeadType.Monkey:
+                    PlayerImage.sprite = MonkeySprite;
+                    break;
+            }
+        }
+      
+     
+        public static PlayerView Instance
         {
             get
             {
-                if (_cameraButtonGameObj == null)
+                if (_instance == null)
                 {
-                    _cameraButtonGameObj = GameObject.FindGameObjectWithTag("CameraButton");
+                    GameObject viewGameObject = GameObject.FindGameObjectWithTag("PlayerHead");
+                    _instance = viewGameObject.GetComponent<PlayerView>();
                 }
-                return _cameraButtonGameObj;
+                return _instance;
             }
-            set { _cameraButtonGameObj = value; }
+            set { _instance = value; }
         }
 
-        public Animator CameraButtonAnimator
+        public Image PlayerImage
         {
             get
             {
-                if (_cameraButtonAnimator == null)
+                if (_playerImage == null)
                 {
-                    _cameraButtonAnimator = CameraButtonGameObj.GetComponent<Animator>();
+                    _playerImage = GetComponent<Image>();
                 }
-                return _cameraButtonAnimator;
-            }
+                return _playerImage;
+            } 
         }
 
-        public GameObject YesNoRetakePhotoBGameObject
-        {
-            get
-            {
-                if (_yesNoRetakePhotoBGameObject == null)
-                {
-                    _yesNoRetakePhotoBGameObject = GameObject.FindGameObjectWithTag("RetakePhotoOption");
-                }
-                return _yesNoRetakePhotoBGameObject;
-            }
-        }
-
-        public Animator YesNoRetakePhotoAnimator
-        {
-            get
-            {
-                if (_yesNoRetakePhotoAnimator == null)
-                {
-                    _yesNoRetakePhotoAnimator = YesNoRetakePhotoBGameObject.GetComponent<Animator>();
-                }
-                return _yesNoRetakePhotoAnimator;
-            }
-        }
-
-        public GameObject FlipCamButtonGameObject
-        {
-            get
-            {
-                if (_flipCamButtonGameObject == null)
-                {
-                    _flipCamButtonGameObject = GameObject.FindGameObjectWithTag("FlipCamera");
-                }
-                return _flipCamButtonGameObject;
-            }
-        }
-
-        public Animator FlipCamAnimator
-        {
-            get
-            {
-                if (_flipCamAnimator == null)
-                {
-                    _flipCamAnimator = FlipCamButtonGameObject.GetComponent<Animator>();
-                }
-                return _flipCamAnimator;
-            }
-        }
-
-        public GameObject PlayerHeadMoverGameObject
-        {
-            get
-            {
-                if (_playerHeadMoverGameObject == null)
-                {
-                    _playerHeadMoverGameObject = GameObject.FindGameObjectWithTag("PlayerHeadMover");
-                }
-                return _playerHeadMoverGameObject;
-            }
-        }
-
-        public Animator PlayerHeadMoverAnimator
-        {
-            get
-            {
-                if (_playerHeadMoverAnimator == null)
-                {
-                    _playerHeadMoverAnimator = PlayerHeadMoverGameObject.GetComponent<Animator>();
-                }
-                return _playerHeadMoverAnimator;
-            }
-        }
-
-        internal void ShowCameraButton(bool status)
-        {
-            if (status)
-            {
-                CameraButtonAnimator.enabled = status;
-            }
-            CameraButtonAnimator.SetBool("isHidden", !status); 
-        }
-
-
-        internal void ShowRetakePhotoOptions(bool status)
-        {
-            if (status)
-            {
-                YesNoRetakePhotoAnimator.enabled = status;
-            }
-            YesNoRetakePhotoAnimator.SetBool("isHidden", !status);
-        }
-
-        internal void ShowFlipCamButton(bool status)
-        {
-            if (status)
-            {
-                FlipCamAnimator.enabled = status;
-            }
-            FlipCamAnimator.SetBool("isHidden",!status);
-        }
 
         internal void ShowSettingsButton(bool status)
         {
            Debug.Log("Fill up this code");
         }
 
-        internal void ShowPlayerHead(bool status)
-        {
-            if (status)
-            {
-                EnableAnimator(PlayerHeadMoverAnimator,status);
-            }
-            PlayerHeadMoverAnimator.SetBool("isHidden",!status);
-        }
+       
         internal void EnableAnimator(Animator anim, bool status)
         {
             anim.enabled = status;
         }
-        
-        
+
+
         private void Awake()
         {
-            CameraButtonAnimator.enabled = false;
-            YesNoRetakePhotoAnimator.enabled = false;
-            FlipCamAnimator.enabled = false;
         }
+
+      
     }
 }

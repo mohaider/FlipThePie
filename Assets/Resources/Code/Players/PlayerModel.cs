@@ -42,9 +42,7 @@ namespace Assets.Resources.Code.Players
         /// </summary>
         public void UpdatePictureModel()
         {
-            View.ShowCameraButton(false);
-            View.ShowFlipCamButton(false);
-            View.ShowRetakePhotoOptions(true);
+       
             View.ShowSettingsButton(false);
             CameraController.SavePicture(SnapShotPath);
             CameraController.HideCameraStream();
@@ -99,9 +97,7 @@ namespace Assets.Resources.Code.Players
 
         internal void EnablePictureTaking()
         {
-            View.ShowCameraButton(true);
-            View.ShowFlipCamButton(true);
-            View.ShowRetakePhotoOptions(false);
+        
             View.ShowSettingsButton(false);
             CameraController.DisplayCameraStream();
         }
@@ -113,9 +109,7 @@ namespace Assets.Resources.Code.Players
 
         internal void DisablePictureTaking()
         {
-            View.ShowCameraButton(false);
-            View.ShowFlipCamButton(false);
-            View.ShowRetakePhotoOptions(false);
+          
             View.ShowSettingsButton(true);
         }
     }

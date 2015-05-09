@@ -193,7 +193,9 @@ namespace Assets.Resources.Code.Camera
 
         private void SetRendererTexture()
         {
-            RendererMaterial.material.mainTexture = CameraTexture;
+          //  RendererMaterial.material.mainTexture = CameraTexture;
+            GetComponent<UnityEngine.UI.RawImage>().material.mainTexture = CameraTexture;
+            CameraTexture.Play();
         }
 
         private void SetGUITexture()

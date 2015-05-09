@@ -1,0 +1,929 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CameraView
+  serializedVersion: 6
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .5
+        inSlope: -.460799932
+        outSlope: -.460799932
+        tangentMode: 10
+      - time: .416666657
+        value: .308000028
+        inSlope: -.460799932
+        outSlope: -.460799932
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0839999989
+        outSlope: .0839999989
+        tangentMode: 10
+      - time: .416666657
+        value: .0350000001
+        inSlope: .0839999989
+        outSlope: .0839999989
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .5
+        inSlope: .517963886
+        outSlope: .517963886
+        tangentMode: 10
+      - time: .416666657
+        value: .715818286
+        inSlope: .517963886
+        outSlope: .517963886
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .409320563
+        outSlope: .409320563
+        tangentMode: 10
+      - time: .416666657
+        value: .170550227
+        inSlope: .409320563
+        outSlope: .409320563
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 4
+        inSlope: -9.60000038
+        outSlope: -9.60000038
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -9.60000038
+        outSlope: -9.60000038
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -57
+        inSlope: 136.800003
+        outSlope: 136.800003
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 162.150009
+        outSlope: 162.150009
+        tangentMode: 10
+      - time: .449999988
+        value: 6.25
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .483333319
+        value: 0
+        inSlope: -187.500015
+        outSlope: -187.500015
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 117
+        inSlope: -280.800018
+        outSlope: -280.800018
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -280.800018
+        outSlope: -280.800018
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 62
+        inSlope: -148.800003
+        outSlope: -148.800003
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 113.100014
+        outSlope: 113.100014
+        tangentMode: 10
+      - time: .449999988
+        value: 12.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .483333319
+        value: 0
+        inSlope: -375.000031
+        outSlope: -375.000031
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .159591615
+        outSlope: .159591615
+        tangentMode: 10
+      - time: .416666657
+        value: .0664965063
+        inSlope: .159591615
+        outSlope: .159591615
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .871633291
+        inSlope: -.169079736
+        outSlope: -.169079736
+        tangentMode: 10
+      - time: .416666657
+        value: .801183403
+        inSlope: -.169079736
+        outSlope: -.169079736
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .621600032
+        outSlope: .621600032
+        tangentMode: 10
+      - time: .416666657
+        value: .259000003
+        inSlope: .621600032
+        outSlope: .621600032
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .871633291
+        inSlope: .130920276
+        outSlope: .130920276
+        tangentMode: 10
+      - time: .416666657
+        value: .926183403
+        inSlope: .130920276
+        outSlope: .130920276
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -53.2999992
+        inSlope: 127.919998
+        outSlope: 127.919998
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 127.919998
+        outSlope: 127.919998
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -3.5
+        inSlope: 8.40000057
+        outSlope: 8.40000057
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 8.40000057
+        outSlope: 8.40000057
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 55
+        inSlope: -132
+        outSlope: -132
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -132
+        outSlope: -132
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 57
+        inSlope: -136.800003
+        outSlope: -136.800003
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -136.800003
+        outSlope: -136.800003
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .328000009
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.x
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .390733659
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.y
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .688810945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.x
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .611633241
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.y
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - path: 3494082728
+      attribute: 2089119715
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 193093493
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 2711263438
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 3600656472
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 1460864421
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 538195251
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 1967290853
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3494082728
+      attribute: 38095219
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 2089119715
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 193093493
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 2711263438
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 3600656472
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 1460864421
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 538195251
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 1967290853
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2565280158
+      attribute: 38095219
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 447507081
+      attribute: 2089119715
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 447507081
+      attribute: 193093493
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 447507081
+      attribute: 2711263438
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 447507081
+      attribute: 3600656472
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: .483333319
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .5
+        inSlope: -.460799932
+        outSlope: -.460799932
+        tangentMode: 10
+      - time: .416666657
+        value: .308000028
+        inSlope: -.460799932
+        outSlope: -.460799932
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0839999989
+        outSlope: .0839999989
+        tangentMode: 10
+      - time: .416666657
+        value: .0350000001
+        inSlope: .0839999989
+        outSlope: .0839999989
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .5
+        inSlope: .517963886
+        outSlope: .517963886
+        tangentMode: 10
+      - time: .416666657
+        value: .715818286
+        inSlope: .517963886
+        outSlope: .517963886
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .409320563
+        outSlope: .409320563
+        tangentMode: 10
+      - time: .416666657
+        value: .170550227
+        inSlope: .409320563
+        outSlope: .409320563
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 4
+        inSlope: -9.60000038
+        outSlope: -9.60000038
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -9.60000038
+        outSlope: -9.60000038
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -57
+        inSlope: 136.800003
+        outSlope: 136.800003
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 162.150009
+        outSlope: 162.150009
+        tangentMode: 10
+      - time: .449999988
+        value: 6.25
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .483333319
+        value: 0
+        inSlope: -187.500015
+        outSlope: -187.500015
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 117
+        inSlope: -280.800018
+        outSlope: -280.800018
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -280.800018
+        outSlope: -280.800018
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.x
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 62
+        inSlope: -148.800003
+        outSlope: -148.800003
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 113.100014
+        outSlope: 113.100014
+        tangentMode: 10
+      - time: .449999988
+        value: 12.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .483333319
+        value: 0
+        inSlope: -375.000031
+        outSlope: -375.000031
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.y
+    path: CameraButton
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .159591615
+        outSlope: .159591615
+        tangentMode: 10
+      - time: .416666657
+        value: .0664965063
+        inSlope: .159591615
+        outSlope: .159591615
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .871633291
+        inSlope: -.169079736
+        outSlope: -.169079736
+        tangentMode: 10
+      - time: .416666657
+        value: .801183403
+        inSlope: -.169079736
+        outSlope: -.169079736
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .621600032
+        outSlope: .621600032
+        tangentMode: 10
+      - time: .416666657
+        value: .259000003
+        inSlope: .621600032
+        outSlope: .621600032
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .871633291
+        inSlope: .130920276
+        outSlope: .130920276
+        tangentMode: 10
+      - time: .416666657
+        value: .926183403
+        inSlope: .130920276
+        outSlope: .130920276
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -53.2999992
+        inSlope: 127.919998
+        outSlope: 127.919998
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 127.919998
+        outSlope: 127.919998
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -3.5
+        inSlope: 8.40000057
+        outSlope: 8.40000057
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: 8.40000057
+        outSlope: 8.40000057
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 55
+        inSlope: -132
+        outSlope: -132
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -132
+        outSlope: -132
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.x
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 57
+        inSlope: -136.800003
+        outSlope: -136.800003
+        tangentMode: 10
+      - time: .416666657
+        value: 0
+        inSlope: -136.800003
+        outSlope: -136.800003
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_SizeDelta.y
+    path: SwitchCam
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .328000009
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.x
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .390733659
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMin.y
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .688810945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.x
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .611633241
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchorMax.y
+    path: CameraStream
+    classID: 224
+    script: {fileID: 0}
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
+  m_Events: []

@@ -9,6 +9,7 @@ namespace Assets.Resources.Code.Camera
     public class CameraDebug:MonoBehaviour
     {
         private AndroidCameraController _androidCameraController;
+        public CameraController Controller;
         public bool DebugMode;
         public UnityEngine.UI.Text Texter; 
         public AndroidCameraController CameraController
@@ -26,17 +27,14 @@ namespace Assets.Resources.Code.Camera
 
         void Start()
         {
-            if (DebugMode)
-            {
-                CameraController.DisplayCameraStream();
-            }
+         
         }
         void Update()
         {
             if (DebugMode)
             {
                 CheckInputs();
-                UpdateDebuggerText();
+             
             }
           
         }
@@ -52,12 +50,25 @@ namespace Assets.Resources.Code.Camera
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                CameraController.SavePicture();
+              Controller.ChangeState(CameraControlState.TakePicture);
             }
             if (Input.GetKeyDown(KeyCode.F2))
             {
-                CameraController.DisplayCameraStream();
+                Controller.ChangeState(CameraControlState.AskIfPictureIsOk);
             }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                Controller.ChangeState(CameraControlState.LoadPicture);
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                Controller.ChangeState(CameraControlState.HideEverything);
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                Controller.ChangeState(CameraControlState.SavePicture);
+            }
+
 
         }
 

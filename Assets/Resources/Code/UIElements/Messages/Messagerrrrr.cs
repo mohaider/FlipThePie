@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Resources.Code.UIElements.Messages
 {
-    public class Message
+    public class Messagerrrrr
     {
         public string Msg { get; set; }
         public string MsgOrigin { get; set; }

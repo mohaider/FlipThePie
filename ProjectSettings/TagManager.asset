@@ -12,6 +12,11 @@ TagManager:
   - PlayerHeadMover
   - MessageWindowText
   - MessageWindow
+  - StartGameView
+  - View
+  - StartLevel
+  - CameraStream
+  - Director
   layers:
   - Default
   - TransparentFX
