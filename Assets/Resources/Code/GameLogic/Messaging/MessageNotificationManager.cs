@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Assets.Resources.Code.GameLogic.Messaging
 {
+    [RequireComponent(typeof(MessageView))]
     public class MessageNotificationManager:MonoBehaviour
     {
         private static MessageNotificationManager _instance;
@@ -22,7 +23,7 @@ namespace Assets.Resources.Code.GameLogic.Messaging
             {
                 if (_instance == null)
                 {
-                    GameObject obj = GameObject.FindGameObjectWithTag("MessageBox");
+                    GameObject obj = GameObject.FindGameObjectWithTag("MessageWindow");
                     _instance = obj.GetComponent<MessageNotificationManager>();
                     DontDestroyOnLoad(_instance.gameObject);
                 }
@@ -101,6 +102,7 @@ namespace Assets.Resources.Code.GameLogic.Messaging
         {
             Instance.IsProcessingMessage = false;
             Instance.CurrentMessage.MsgSender.CallbackAction(true);
+            MessageView.Instance.ShowBox(false);
             TryNextMessage();
         }
 

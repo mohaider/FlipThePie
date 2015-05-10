@@ -12,7 +12,7 @@ namespace Assets.Resources.Code.GameLogic
         private static PlayerSettingsCreationManager _instance ;
         private Queue<PlayerSettingsRequest> _playerCreationQueue;
         private bool _isProcessing=false;
-        private Nullable<PlayerSettingsRequest> _currentSettingsRequest;
+        private PlayerSettingsRequest _currentSettingsRequest;
         private GameDirector _director;
         public static PlayerSettingsCreationManager Instance
         {
@@ -51,7 +51,7 @@ namespace Assets.Resources.Code.GameLogic
             set { _isProcessing = value; }
         }
 
-        public PlayerSettingsRequest? CurrentSettingsRequest
+        public PlayerSettingsRequest CurrentSettingsRequest
         {
             get { return _currentSettingsRequest; }
             set { _currentSettingsRequest = value; }
@@ -71,20 +71,27 @@ namespace Assets.Resources.Code.GameLogic
 
             if (Instance.PlayerCreationQueue.Count == 0)
             {
-                Instance.CurrentSettingsRequest = null;
+                //Instance.CurrentSettingsRequest = null;
                 yield break;
             }
 
             CurrentSettingsRequest = Instance.PlayerCreationQueue.Dequeue();
-            PlayerSettingsRequest currRequest = (PlayerSettingsRequest) CurrentSettingsRequest;//unbox the nullable type
-            while (!currRequest.FinishedSelection())
+           
+          //  PlayerSettingsRequest currRequest = (PlayerSettingsRequest) CurrentSettingsRequest;//unbox the nullable type
+            while (!CurrentSettingsRequest.FinishedSelection())
                 {
                     yield return null;
                 }
             //send a message to the director that a player has finished processing
             Director.PlayerFinishedSelection();
-            StartCoroutine(ProcessQueue()); //call this recursively. 
-            yield break;
+            if (CurrentSettingsRequest.FinishedSelection())
+           {
+               Debug.Log("changing players");
+              
+                //let the director know that the player has finished selecting his choices
+               StartCoroutine(ProcessQueue()); //call this recursively. 
+            }
+            
 
         }
  
@@ -93,38 +100,45 @@ namespace Assets.Resources.Code.GameLogic
         /// Registers the director, then add the number of players
         /// </summary>
         /// <param name="numberPlayers"></param>
-        public void RegisterDirector( int numberPlayers)
+        public void RegisterNumPlayers( List<Player> playerList )
         {
-            
-            for (int i = 0; i < numberPlayers; i++)
+            Instance.PlayerCreationQueue = new Queue<PlayerSettingsRequest>();
+            for (int i = playerList.Count - 1; i >= 0; i--)
             {
                 PlayerSettingsRequest playerRequest = new PlayerSettingsRequest();
-                playerRequest.Initialize();
+                playerRequest.Player = playerList[i];
                 Instance.PlayerCreationQueue.Enqueue(playerRequest);
             }
+          
+            StartCoroutine(ProcessQueue());
         }
 
         public void IconSelected()
         {
-            PlayerSettingsRequest currRequest = (PlayerSettingsRequest)CurrentSettingsRequest;//unbox the nullable type
-            currRequest.HasSelectedIcon = true;
+            
+            _currentSettingsRequest.HasSelectedIcon = true;
         }
 
         public void PictureSelected()
         {
-            PlayerSettingsRequest currRequest = (PlayerSettingsRequest)CurrentSettingsRequest;//unbox the nullable type
-            currRequest.HasSelectedPicture = true;  
+            _currentSettingsRequest.HasSelectedPicture=true;
+        }
+
+        public string info;
+
+        void Update()
+        {
+            info = "has selected icon" + CurrentSettingsRequest.HasSelectedIcon + "   " + "has selected pic" + CurrentSettingsRequest.HasSelectedPicture;
         }
 
 
-
-        
     }
 
     public struct PlayerSettingsRequest
     {
         public bool HasSelectedIcon;
         public bool HasSelectedPicture;
+        public Player Player;
 
         public void Initialize()
         {
@@ -132,10 +146,26 @@ namespace Assets.Resources.Code.GameLogic
             HasSelectedPicture = false;
         }
 
+        public void ChangeIconSelectionToTrue()
+        {
+            HasSelectedIcon = true;
+        }
+        public void ChangeIconSelectionToFalse()
+        {
+            HasSelectedIcon = false;
+        }
         public bool FinishedSelection()
         {
             return HasSelectedIcon && HasSelectedPicture;
         }
 
+        public void ChangePictureSelectionToTrue()
+        {
+            HasSelectedIcon = true;
+        }
+        public void ChangePictureSelectionToFalse()
+        {
+            HasSelectedIcon = false;
+        }
     }
 }

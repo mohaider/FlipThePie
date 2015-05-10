@@ -34,7 +34,7 @@ namespace Assets.Resources.Code.UIElements
            ThisAnimator.SetBool("isHidden", !status);
        }
 
-       void Start()
+       void Awake()
        {
            Name = name;
        }

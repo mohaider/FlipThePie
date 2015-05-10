@@ -21,7 +21,7 @@ namespace Assets.Resources.Code.GameLogic.Messaging
            {
                if (_messageBox == null)
                {
-                   GameObject messageGO = GameObject.FindGameObjectWithTag("MessageBox");
+                   GameObject messageGO = GameObject.FindGameObjectWithTag("MessageWindow");
                    _messageBox = messageGO.GetComponent<GameAnimatorController>();
                }
                return _messageBox;
@@ -34,7 +34,7 @@ namespace Assets.Resources.Code.GameLogic.Messaging
            {
                if (_instance == null)
                {
-                   GameObject messageBoxGO = GameObject.FindGameObjectWithTag("MessageBox");
+                   GameObject messageBoxGO = GameObject.FindGameObjectWithTag("MessageWindow");
                    _instance = messageBoxGO.GetComponent<MessageView>();
                    
                }
@@ -49,7 +49,7 @@ namespace Assets.Resources.Code.GameLogic.Messaging
            {
                if (_messageBoxText == null)
                {
-                   GameObject messageBoxText = GameObject.FindGameObjectWithTag("MessageBox");
+                   GameObject messageBoxText = GameObject.FindGameObjectWithTag("MessageWindowText");
                    _messageBoxText = messageBoxText.GetComponent<Text>();
                }
                return _messageBoxText;

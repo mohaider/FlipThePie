@@ -9,8 +9,9 @@ namespace Assets.Resources.Code.GameLogic.Level
  
     public class BaseLevelController: MonoBehaviour
     {
-   
 
+        public int LevelNumber;
+        public string LevelName;
         public delegate void LevelStateHandler(int newState);
 
         public event LevelStateHandler OnStateChange;

@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Camera
   - UI
-  - CameraButton
+  - CameraController
   - RetakePhotoOption
   - FlipCamera
   - PlayerHeadMover
@@ -17,6 +17,8 @@ TagManager:
   - StartLevel
   - CameraStream
   - Director
+  - PlayerHead
+  - GameLoader
   layers:
   - Default
   - TransparentFX

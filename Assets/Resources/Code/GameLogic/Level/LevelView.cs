@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Resources.Code.Camera;
 using Assets.Resources.Code.UIElements;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ namespace Assets.Resources.Code.GameLogic.Level
         private static LevelView _instance;
         private Dictionary<string,GameAnimatorController> _animationValues;
         private bool _currentlyPlayingAnimation = false;
-
+        private List<string> _ignoreList;
+        private CameraViewAnimatorController _cameraViewAnimator;
+        private CameraController _cameraController;
   //todo get game animator controllers for all the game objects that uses animators
 
         public static LevelView Instance
@@ -39,6 +42,7 @@ namespace Assets.Resources.Code.GameLogic.Level
                 {
                     _animationValues = new Dictionary<string, GameAnimatorController>();
                     GameObject[] allAnimationsInSceneGameObjects = GameObject.FindGameObjectsWithTag("View");
+                    
                     for (int i = 0; i < allAnimationsInSceneGameObjects.Length; i++)
                     {
                         GameAnimatorController animationController =
@@ -53,10 +57,39 @@ namespace Assets.Resources.Code.GameLogic.Level
                             _animationValues.Add(animationController.Name,animationController);
                         }
                     }
+                  
                 }
                 return _animationValues;
             }
             set { _animationValues = value; }
+        }
+
+        public List<string> IgnoreList
+        {
+            get
+            {
+                if (_ignoreList == null)
+                {
+                    _ignoreList= new List<string>();
+                }
+                return _ignoreList;
+            }
+          
+        }
+
+
+
+        public CameraController CamController
+        {
+            get
+            {
+                if (_cameraController == null)
+                {
+                    GameObject obj = GameObject.FindGameObjectWithTag("CameraStream");
+                    _cameraController = obj.GetComponent<CameraController>();
+                }
+                return _cameraController;
+            }
         }
 
         public void SwitchToCameraView(bool status)
@@ -89,6 +122,10 @@ namespace Assets.Resources.Code.GameLogic.Level
         /// <param name="exceptThisOne"></param>
         private void HideOtherViews(string exceptThisOne)
         {
+            if (exceptThisOne != "CameraView")
+            {
+               CamController.ChangeState(CameraControlState.HideEverything);
+            }
             foreach (KeyValuePair<string, GameAnimatorController> entry in AnimationValues)
             {
                 if (exceptThisOne == entry.Key)
@@ -98,6 +135,7 @@ namespace Assets.Resources.Code.GameLogic.Level
                     entry.Value.Show(false);
                 }
             }
+            
         }
         public void SwitchToModeSelectView(bool status)
         {
@@ -135,6 +173,10 @@ namespace Assets.Resources.Code.GameLogic.Level
             GameAnimatorController StartMenuController;
             if (AnimationValues.TryGetValue(selectedGameView, out StartMenuController))
                 StartMenuController.Show(true);
+            else if (selectedGameView == "CameraView")
+            {
+                CamController.ChangeState(CameraControlState.TakePicture);
+            }
             else
             {
                 Debug.Log("Cannot find"+ selectedGameView+  "  in LevelView");
@@ -146,7 +188,7 @@ namespace Assets.Resources.Code.GameLogic.Level
 
         void Start()
         {
-            
+            IgnoreList.Add("CameraView");
         }
     }
 }

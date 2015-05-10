@@ -8,7 +8,7 @@ namespace Assets.Resources.Code.UIElements
 {
     public class CameraViewAnimatorController: MonoBehaviour
     {
-     public GameObject CameraSwitchButton;
+     
         private Animator _animator;
         private string hideCameraFrame = "hideCameraFrame";
         private string showCameraControls = "showCameraControls";

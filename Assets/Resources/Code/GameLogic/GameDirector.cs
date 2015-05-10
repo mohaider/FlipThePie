@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Assets.Resources.Code.GameLogic.Level;
+using Assets.Resources.Code.GameLogic.Level.GameStart;
+using Assets.Resources.Code.GameLogic.Level.Level1;
 using Assets.Resources.Code.GameLogic.Messaging;
 using Assets.Resources.Code.Players;
 
@@ -15,6 +17,7 @@ namespace Assets.Resources.Code.GameLogic
         private static GameDirector _instance;
         private PlayerSettingsCreationManager _playerSettings;
         private Player _currentPlayer;
+        private int _currentPlayerIndex;
         private List<Player> _playerList; 
         private Queue<Player> _playerQueue;
         private List<BaseLevelController> _levelsList;
@@ -84,6 +87,7 @@ namespace Assets.Resources.Code.GameLogic
 
                 {
                     _playerList = new List<Player>();
+
                 }
                 return _playerList;
             }
@@ -108,13 +112,61 @@ namespace Assets.Resources.Code.GameLogic
             {
                 ChangeStateToGameMode();
             }
-            else if (!_singlePlayerMode && PlayerQueue.Count != 0)
+            else if (!_singlePlayerMode)
             {
-                CurrentPlayer = PlayerQueue.Dequeue();
+                _currentPlayerIndex ++;
+                if (_currentPlayerIndex >= PlayerList.Count)
+                {
+                    ChangeStateToGameMode();
+                    return;
+                }
+                CurrentPlayer = PlayerList[_currentPlayerIndex];
                 ChangeStateToIconSelection();
             }
         }
 
+        private void RegisterNewPlayers(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                GameObject player = Instantiate(UnityEngine.Resources.Load("Player")) as GameObject;
+                player.name = "Player"+(i+1);
+                player.GetComponent<Player>().name = player.name;
+                PlayerList.Add(player.GetComponent<Player>());
+            }
+            _currentPlayerIndex = 0;
+            CurrentPlayer = PlayerList[0];
+        }
+
+        private void DestroyExistingPlayers()
+        {
+            for (int i = 0; i < PlayerList.Count; i++)
+            {
+                Destroy(PlayerList[i].gameObject);
+            }
+            PlayerList = new List<Player>();
+        }
+        public void SinglePlayerMode(bool status)
+        {
+            if (PlayerList != null)
+            {
+                DestroyExistingPlayers();
+            }
+            _singlePlayerMode = status;
+
+            if (!status) //create two players
+            {
+
+                RegisterNewPlayers(2);
+            }
+            else
+            {
+                RegisterNewPlayers(1);
+            }
+
+            PlayerSettingsCreationManager.Instance.RegisterNumPlayers(PlayerList);
+            ChangeStateToIconSelection();//change the game state to allow the player to select the icon they want
+        }
         private void ChangeStateToIconSelection()
         {
             LevelView.Instance.SwitchToPlayerIconSelect(true);
@@ -140,9 +192,10 @@ namespace Assets.Resources.Code.GameLogic
             CurrentPlayer.ChosenIcon = icon;
             
             PlayerSettingsCreationManager.Instance.IconSelected();
+            VerifyPlayerHasPicture();
         }
 
-        public void VerifyPlayerPicture()
+        public void VerifyPlayerHasPicture()
         {
             if (CurrentPlayer.HasPicture)
             {
@@ -188,7 +241,38 @@ namespace Assets.Resources.Code.GameLogic
             PlayerSettingsCreationManager.Instance.PictureSelected();
         }
 
+        public void TryNextPlayer()
+        {
+            
+        }
 
+        public void AddPlayer(Player p)
+        {
+            if (_playerList == null)
+            {
+                _playerList = new List<Player>();
+                _playerList.Add(_currentPlayer);
+            }
+            else
+            {
+                _playerList.Add(p);
+            }
+        }
+
+        public void AddLevel(BaseLevelController level)
+        {
+            if (_levelsList == null)
+            {
+                _levelsList = new List<BaseLevelController>();
+                _currentLevel = level;
+                _levelsList.Add(_currentLevel);
+                _currentLevel.ChangeState(StartLevelState.GameStart);
+            }
+            else
+            {
+                _levelsList.Add(level);
+            }
+        }
         public void TakePlayerPicture()
         {
 

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using Assets.Resources.Code.Camera;
 using Assets.Resources.Code.GameLogic;
+using Assets.Resources.Code.Players;
 using UnityEngine.UI;
 
 
 namespace Assets.Resources.Code.Players
 {
-    
+[RequireComponent(typeof(PlayerView))]
     public class Player : MonoBehaviour
     {
         // private const string Prependpath = "Assets/Resources/SaveData/SnapShots/";
@@ -66,8 +67,8 @@ namespace Assets.Resources.Code.Players
 
         void Start()
         {
-            PlayerName = name;
-            GameDirector.Instance.CurrentPlayer = this;
+           
+
         }
     }
 }

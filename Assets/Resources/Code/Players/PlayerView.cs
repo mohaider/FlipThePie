@@ -16,7 +16,9 @@ namespace Assets.Resources.Code.Players
         public Sprite MonkeySprite;
         public Sprite GiraffeSprite;
         private UnityEngine.UI.Image _playerImage;
+        private Sprite _selectedSprite;
         private static PlayerView _instance;
+        private int _numberOfRolls;
 
 
 
@@ -25,11 +27,11 @@ namespace Assets.Resources.Code.Players
             switch (value)
             {
                 case PlayerHeadType.Giraffe:
-                    PlayerImage.sprite = GiraffeSprite;
+                    _selectedSprite = GiraffeSprite;
                     break;
 
                     case PlayerHeadType.Monkey:
-                    PlayerImage.sprite = MonkeySprite;
+                    _selectedSprite = MonkeySprite;
                     break;
             }
         }
@@ -59,6 +61,12 @@ namespace Assets.Resources.Code.Players
                 }
                 return _playerImage;
             } 
+        }
+
+        public int NumberOfRolls
+        {
+            get { return _numberOfRolls; }
+            set { _numberOfRolls = value; }
         }
 
 

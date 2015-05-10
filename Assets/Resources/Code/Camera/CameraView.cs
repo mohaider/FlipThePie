@@ -121,8 +121,8 @@ namespace Assets.Resources.Code.Camera
             {
                 if (_cameraAnimatorController == null)
                 {
-                    GameObject camAnimGameObject = GameObject.FindGameObjectWithTag("Camera");
-                    _cameraAnimatorController = camAnimGameObject.GetComponent<CameraViewAnimatorController>();
+                    GameObject camAnimGameObject = GameObject.FindGameObjectWithTag("CameraController");
+                        _cameraAnimatorController = camAnimGameObject.GetComponent<CameraViewAnimatorController>();
                 }
                 return _cameraAnimatorController;
             }
@@ -186,8 +186,8 @@ namespace Assets.Resources.Code.Camera
 
         private void Start()
         {
-            CameraTexture.Play();
-            ShowStream();
+            //CameraTexture.Play();
+         //   ShowStream();
             baseRotation = transform.rotation;
         }
         void Update()
@@ -211,6 +211,7 @@ namespace Assets.Resources.Code.Camera
 
         internal void SwitchToLoadPictureView()
         {
+            CameraTexture.Stop();
             LoadPicture();
             CameraAnimatorController.PictureTakingModeOffWithCameraFrame();
         }
@@ -222,14 +223,15 @@ namespace Assets.Resources.Code.Camera
 
         internal void HideEverything()
         {
+            CameraTexture.Stop();
             CameraAnimatorController.HideEverything();
         }
 
-        void OnEnable()
+        void Awake()
         {
             if (!HasMultipleCameras())
             {
-                CameraAnimatorController.CameraSwitchButton.SetActive(false);
+                SwitchButton.SetActive(false);
             }
         }
 
