@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Resources.Code.GameLogic.Level;
+using Assets.Resources.Code.GameLogic.Messaging.SwishingMessage;
 using Assets.Resources.Code.UIElements;
 using UnityEngine;
 
@@ -95,14 +96,14 @@ namespace Assets.Resources.Code.GameLogic.Messaging
 
         private void DisplayMessage(Message msg)
         {
-         MessageView.Instance.PopUpBox(msg);   
+       SwishingMessageView.Instance.PopUpBox(msg);   
         }
 
         public void ConsumeMessage()
         {
             Instance.IsProcessingMessage = false;
             Instance.CurrentMessage.MsgSender.CallbackAction(true);
-            MessageView.Instance.ShowBox(false);
+            SwishingMessageView.Instance.ShowBox(false);
             TryNextMessage();
         }
 

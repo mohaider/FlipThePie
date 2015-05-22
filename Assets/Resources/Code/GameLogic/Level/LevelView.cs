@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Resources.Code.Camera;
+using Assets.Resources.Code.GameLogic.IngameObjects.MusicButton;
 using Assets.Resources.Code.UIElements;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Resources.Code.GameLogic.Level
@@ -17,81 +19,10 @@ namespace Assets.Resources.Code.GameLogic.Level
         private List<string> _ignoreList;
         private CameraViewAnimatorController _cameraViewAnimator;
         private CameraController _cameraController;
+        private MusicButtonControllerView m_musicButtonControllerView;
   //todo get game animator controllers for all the game objects that uses animators
 
-        public static LevelView Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    GameObject obj = GameObject.FindGameObjectWithTag("StartLevel");
-                    _instance = obj.GetComponent<LevelView>();
-                    DontDestroyOnLoad(_instance.gameObject);
-                }
-                return _instance;
-            }
-            set { _instance = value; }
-        }
-
-        public Dictionary<string, GameAnimatorController> AnimationValues
-        {
-            get
-            {
-                if (_animationValues == null)
-                {
-                    _animationValues = new Dictionary<string, GameAnimatorController>();
-                    GameObject[] allAnimationsInSceneGameObjects = GameObject.FindGameObjectsWithTag("View");
-                    
-                    for (int i = 0; i < allAnimationsInSceneGameObjects.Length; i++)
-                    {
-                        GameAnimatorController animationController =
-                            allAnimationsInSceneGameObjects[i].GetComponent<GameAnimatorController>();
-                        if (animationController == null)
-                        {
-                            Debug.Log("View " + allAnimationsInSceneGameObjects[i].name +
-                                      " doesn't have a animation controller attached. Fix it");
-                        }
-                        else
-                        {
-                            _animationValues.Add(animationController.Name,animationController);
-                        }
-                    }
-                  
-                }
-                return _animationValues;
-            }
-            set { _animationValues = value; }
-        }
-
-        public List<string> IgnoreList
-        {
-            get
-            {
-                if (_ignoreList == null)
-                {
-                    _ignoreList= new List<string>();
-                }
-                return _ignoreList;
-            }
-          
-        }
-
-
-
-        public CameraController CamController
-        {
-            get
-            {
-                if (_cameraController == null)
-                {
-                    GameObject obj = GameObject.FindGameObjectWithTag("CameraStream");
-                    _cameraController = obj.GetComponent<CameraController>();
-                }
-                return _cameraController;
-            }
-        }
-
+       
         public void SwitchToCameraView(bool status)
         {
             //HideOtherViews
@@ -148,6 +79,10 @@ namespace Assets.Resources.Code.GameLogic.Level
             StartCoroutine(WaitThenShowView("PlayerIconSelect", 1.3f));
         }
 
+        public void SwitchToPieSpin(bool status)
+        {
+            StartCoroutine(WaitThenShowView("PieSpinner", 1.3f));
+        }
 
 
         public void ShowMessage(string args, bool status)
@@ -186,9 +121,124 @@ namespace Assets.Resources.Code.GameLogic.Level
             _currentlyPlayingAnimation = false;
         }
 
+        public void SwitchToMusicNoteView(bool status,Action callback)
+        {
+            MusicButtonView.InGameView();
+            Debug.Log("show the player's head");
+            WaitThenRunAction(0.45f, callback);
+        }
+
+        private IEnumerator WaitThenRunAction(float t, Action callback)
+        {
+            yield return new WaitForSeconds(t);
+            callback();
+        }
+
+ /*       private IEnumerator WaitThenRunAction(Action callback, Animator anim,string animLayer)
+        {
+            anim.GetCurrentAnimatorClipInfo(0).Length
+            anim.GetCurrentAnimationClipState(0).length
+            while(anim.GetCurrentAnimatorStateInfo(0).IsName())
+        }
+*/
+        public void ShrinkMusicNoteView(bool status, Action callback)
+        {
+            MusicButtonView.InGameView();
+            Debug.Log("hide the player's head");
+        }
+        private void AddToIgnoreList()
+        {
+            
+        }
         void Start()
         {
             IgnoreList.Add("CameraView");
         }
+        public static LevelView Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    GameObject obj = GameObject.FindGameObjectWithTag("StartLevel");
+                    _instance = obj.GetComponent<LevelView>();
+                    DontDestroyOnLoad(_instance.gameObject);
+                }
+                return _instance;
+            }
+            set { _instance = value; }
+        }
+
+        public Dictionary<string, GameAnimatorController> AnimationValues
+        {
+            get
+            {
+                if (_animationValues == null)
+                {
+                    _animationValues = new Dictionary<string, GameAnimatorController>();
+                    GameObject[] allAnimationsInSceneGameObjects = GameObject.FindGameObjectsWithTag("View");
+
+                    for (int i = 0; i < allAnimationsInSceneGameObjects.Length; i++)
+                    {
+                        GameAnimatorController animationController =
+                            allAnimationsInSceneGameObjects[i].GetComponent<GameAnimatorController>();
+                        if (animationController == null)
+                        {
+                            Debug.Log("View " + allAnimationsInSceneGameObjects[i].name +
+                                      " doesn't have a animation controller attached. Fix it");
+                        }
+                        else
+                        {
+                            _animationValues.Add(animationController.Name, animationController);
+                        }
+                    }
+
+                }
+                return _animationValues;
+            }
+            set { _animationValues = value; }
+        }
+
+        public List<string> IgnoreList
+        {
+            get
+            {
+                if (_ignoreList == null)
+                {
+                    _ignoreList = new List<string>();
+                }
+                return _ignoreList;
+            }
+
+        }
+
+
+
+        public CameraController CamController
+        {
+            get
+            {
+                if (_cameraController == null)
+                {
+                    GameObject obj = GameObject.FindGameObjectWithTag("CameraStream");
+                    _cameraController = obj.GetComponent<CameraController>();
+                }
+                return _cameraController;
+            }
+        }
+
+        public MusicButtonControllerView MusicButtonView
+        {
+            get
+            {
+                if (m_musicButtonControllerView == null)
+                {
+                    Tools.SceneObjectFinder<MusicButtonControllerView>.FindGameObjectReturnT("MusicButtonController");
+                }
+                return m_musicButtonControllerView;
+            }
+            set { m_musicButtonControllerView = value; }
+        }
+
     }
 }

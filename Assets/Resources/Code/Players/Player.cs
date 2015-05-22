@@ -19,7 +19,11 @@ namespace Assets.Resources.Code.Players
         private PlayerView _playerView;
         public string ChosenIcon { get; set; }
 
-        public bool HasPicture { get; set; }
+    public bool HasPicture
+    {
+        
+        get; set;//Todo : try to load the picture and return the result of the load
+    }
 
         public string PlayerName
         {
